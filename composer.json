@@ -1,0 +1,16 @@
+{
+  "name": "the-riquelme/php-pro",
+  "autoload": {
+    "psr-4": {
+      "app\\": "app"
+    },
+    "files": []
+  },
+  "authors": [
+    {
+      "name": "the-riquelme",
+      "email": "riquelmedamiaosilva@gmail.com"
+    }
+  ],
+  "require": {}
+}
