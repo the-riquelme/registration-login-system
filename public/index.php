@@ -1,5 +1,5 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+require 'bootstrap.php';
 
-echo __DIR__ . "/../vendor/autoload.php";
+router();

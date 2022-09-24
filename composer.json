@@ -4,7 +4,9 @@
     "psr-4": {
       "app\\": "app"
     },
-    "files": []
+    "files": [
+      "app/router/router.php"
+    ]
   },
   "authors": [
     {
