@@ -7,5 +7,4 @@ return (new PhpCsFixer\Config())
         'array_syntax' => ['syntax' => 'short'],
     ])
     // ->setIndent("\t")
-    ->setLineEnding("\n")
-;
+    ->setLineEnding("\n");

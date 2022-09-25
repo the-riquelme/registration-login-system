@@ -27,9 +27,8 @@ function regexMatchRoutes($uri, $routes) {
 }
 
 function formatParams($uri, $params) {
-  $uri = explode('/', ltrim($uri, '/'));
-
   $paramsData = [];
+
   foreach ($params as $index => $param) {
     $paramsData[$uri[$index - 1]] = $param;
   }
@@ -42,7 +41,7 @@ function getParams($uri, $matchedUri) {
     $matchedToGetParams = array_keys($matchedUri)[0];
 
     $params = array_diff(
-      explode('/', ltrim($uri, '/')),
+      $uri,
       explode('/', ltrim($matchedToGetParams, '/'))
     );
 
@@ -56,11 +55,17 @@ function router() {
   $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
   $routes = getRoutes();
   $matchedUri = exactMatchUriInRoutes($uri, $routes);
+  $params = [];
 
   if (empty($matchedUri)) {
     $matchedUri = regexMatchRoutes($uri, $routes);
+    $uri = explode('/', ltrim($uri, '/'));
     $params = getParams($uri, $matchedUri);
   }
 
-  var_dump($params);
+  if (!empty($matchedUri)) {
+    return loadController($matchedUri, $params);
+  }
+
+  throw new Exception('Algo deu Errado!');
 }
