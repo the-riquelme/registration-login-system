@@ -5,9 +5,13 @@ namespace app\controllers;
 class Home {
   
   public function index($params) {
+    $users = fetchAll('users');
     return [
       'view' => 'home.php',
-      'data' => ['name' => 'The-riquelme']
+      'data' => [
+        'title' => 'Home',
+        'users' => $users
+      ]
     ];
   }
   

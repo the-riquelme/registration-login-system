@@ -5,12 +5,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
+  <title><?= $title ?></title>
 </head>
 
 <body>
-
-  <h2>Page with PHP development</h2>
 
   <div class="container">
     <?php require VIEWS.$view; ?>

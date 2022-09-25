@@ -3,13 +3,15 @@
 namespace app\controllers;
 
 class User {
-  public function create($params) {
-    var_dump($params['user']);
+  
+  public function show($params) {
+    if (!isset($params['user'])) {
+      return redirect();
+    }
+
+    $user = findBy('users', 'id', $params['user']);
+    var_dump($user);
     die();
   }
   
-  public function show($params) {
-    var_dump($params);
-    die();
-  }
 }
