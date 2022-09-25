@@ -1,17 +1,7 @@
 <?php
 
-function getRoutes() {
-  return require 'routes.php';
-}
-
 function exactMatchUriInRoutes($uri, $routes) {
-  if (array_key_exists($uri, $routes)) {
-    return [
-      $uri => $routes[$uri]
-    ];
-  }
-
-  return [];
+  return array_key_exists($uri, $routes) ? [$uri => $routes[$uri]] : [];
 }
 
 function regexMatchRoutes($uri, $routes) {
@@ -53,12 +43,14 @@ function getParams($uri, $matchedUri) {
 
 function router() {
   $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-  $routes = getRoutes();
-  $matchedUri = exactMatchUriInRoutes($uri, $routes);
+  $routes = require 'routes.php';
+  $requestMethod = $_SERVER['REQUEST_METHOD'];
+  
+  $matchedUri = exactMatchUriInRoutes($uri, $routes[$requestMethod]);
   $params = [];
 
   if (empty($matchedUri)) {
-    $matchedUri = regexMatchRoutes($uri, $routes);
+    $matchedUri = regexMatchRoutes($uri, $routes[$requestMethod]);
     $uri = explode('/', ltrim($uri, '/'));
     $params = getParams($uri, $matchedUri);
   }
