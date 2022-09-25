@@ -14,5 +14,5 @@ function loadController($matchedUri, $params) {
     throw new Exception("Método {$method} nao existe no controller {$controller}");
   }
   
-  $controllerInstance->$method($params);
+  return $controllerInstance->$method($params);
 }
