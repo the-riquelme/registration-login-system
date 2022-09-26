@@ -12,8 +12,30 @@ class Login {
   }
 
   public function store() {
-    var_dump("Login");
-    die();
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $password = strip_tags($_POST['password']);
+
+    if (empty($email) || empty($password)) {
+      return setMessageAndRedirect('message', 'Usuário ou senha inválidos', '/login');
+    }
+
+    $user = findBy('users', 'email', $email);
+
+    if (!$user) {
+      return setMessageAndRedirect('message', 'Usuário ou senha inválidos', '/login');
+    }
+
+    // if (!password_verify($password, $user->password)) {
+    //   return setMessageAndRedirect('message', 'Usuário ou senha inválidos', '/login');
+    // }
+
+    $_SESSION[LOGGED] = $user;
+    return redirect();
+  }
+
+  public function destroy() {
+    unset($_SESSION[LOGGED]);
+    return redirect();
   }
   
 }

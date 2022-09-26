@@ -1,7 +1,9 @@
 <h2>Login</h2>
 
-<form action="/login" method="post" id="box-login">
-  <input type="text" name="email" placeholder="Seu email" value="liz06@mascarenhas.net">
-  <input type="password" name="password" placeholder="Sua senha" value="123">
-  <button type="submit">Login</button>
+<?= getFlash('message'); ?>
+
+<form action="/login" method="POST" id="box-login">
+  <input type="email" name="email" placeholder="Seu email" value="rd15075@gmail.com">
+  <input type="password" name="password" placeholder="Sua senha" value="Chaves122@">
+  <button type="message">Login</button>
 </form>
