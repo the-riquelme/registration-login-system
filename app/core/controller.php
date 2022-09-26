@@ -17,7 +17,7 @@ function loadController($matchedUri, $params) {
   $controller = $controllerInstance->$method($params);
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      die();
+    die();
   }
 
   return $controller;
