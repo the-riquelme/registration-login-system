@@ -1,5 +1,5 @@
 {
-  "name": "the-riquelme/php-pro",
+  "name": "the-riquelme/registration-login-system",
   "autoload": {
     "psr-4": {
       "app\\": "app"

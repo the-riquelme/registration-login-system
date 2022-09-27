@@ -34,10 +34,6 @@ body {
   align-items: center;
 }
 
-.create-form input {
-  display: block;
-}
-
 ul#menu_list {
   list-style: none;
   display: flex;
