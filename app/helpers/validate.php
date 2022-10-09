@@ -53,16 +53,21 @@ function singleValidation($validate, $field, $param) {
 
 function multipleValidations($validate, $field, $param) {
   $explodePipeValidate = explode('|', $validate);
+  $result = [];
   
   foreach ($explodePipeValidate as $validate) {
     if (str_contains($validate, ':')) {
       [$validate, $param] = explode(':', $validate);
     }
-    
-    $result = $validate($field, $param);
+
+    $result[$field] = $validate($field, $param);
+
+    if (isset($result[$field]) && $result[$field] === false) {
+      break;
+    }
   }
 
-  return $result;
+  return $result[$field] ;
 }
 
 function validate(array $validations) {
