@@ -1,3 +1,5 @@
+<?php $this->layout('master', ['title' => $title]) ?>
+
 <h2>Login</h2>
 
 <?= getFlash('message'); ?>

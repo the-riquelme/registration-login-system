@@ -17,15 +17,21 @@ try {
     throw new Exception('O índice view está faltando');
   }
 
-  if (!file_exists(VIEWS.$router['view'])) {
+  if (!file_exists(VIEWS.$router['view'] . '.php')) {
     throw new Exception("Essa view ({$router['view']}) não existe");
   }
 
-  extract($router['data']); // !
+  // Create new Plates instance
+  $templates = new League\Plates\Engine(VIEWS);
 
-  $view = $router['view'];
+  // Render a template
+  echo $templates->render($router['view'], $router['data']);
 
-  require VIEWS.'master.php';
+  // extract($router['data']); // !
+
+  // $view = $router['view'];
+
+  // require VIEWS.'master.php';
 } catch(Exception $e) {
   var_dump($e->getMessage());
 }

@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
-  <title><?= $title ?></title>
+  <title><?=$this->e($title)?></title>
 </head>
 
 <body>
 
   <div id="header">
-    <?php require 'partials/header.php'; ?>
+    <?=$this->insert('partials/header')?>
   </div>
 
   <div class="container">
-    <?php require VIEWS.$view; ?>
+    <?=$this->section('content')?>
   </div>
 
 </body>

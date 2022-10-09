@@ -1,3 +1,5 @@
+<?php $this->layout('master', ['title' => $title]) ?>
+
 <h2>Users <?= count($users) ?></h2>
 
 <ul id="users-home">
