@@ -22,5 +22,8 @@
       "name": "the-riquelme",
       "email": "riquelmedamiaosilva@gmail.com"
     }
-  ]
+  ],
+  "require": {
+    "league/plates": "^3.4"
+  }
 }
