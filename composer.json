@@ -13,7 +13,8 @@
       "app/router/router.php",
       "app/core/controller.php",
       "app/database/connect.php",
-      "app/database/fetch.php"
+      "app/database/fetch.php",
+      "app/database/create.php"
     ]
   },
   "authors": [
