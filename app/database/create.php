@@ -2,9 +2,9 @@
 
 function create($table, $data) {
   try {
-    // if (!arrayIsAssociative($data)) {
-    //     throw new Exception("O array tem que ser associativo.");
-    // }
+    if (array_is_list($data)) {
+      throw new Exception("O array tem que ser associativo.");
+    }
 
     $connect = connectDatabase();
 

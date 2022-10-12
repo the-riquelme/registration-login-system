@@ -14,7 +14,9 @@
       "app/core/controller.php",
       "app/database/connect.php",
       "app/database/fetch.php",
-      "app/database/create.php"
+      "app/database/create.php",
+      "app/database/update.php",
+      "app/database/delete.php"
     ]
   },
   "authors": [
