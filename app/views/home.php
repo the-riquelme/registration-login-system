@@ -2,6 +2,14 @@
 
 <h2>Users <?= count($users) ?></h2>
 
+<div x-data="users()" x-init="loadUsers()">
+  <ul>
+    <template x-for="user in data">
+      <li x-text="user.name"></li>
+    </template>
+  </ul>
+</div>
+
 <ul id="users-home">
   <?php foreach ($users as $user) : ?>
   <li>
@@ -9,27 +17,3 @@
   </li>
   <?php endforeach; ?>
 </ul>
-
-<?php $this->start('scripts') ?>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js"
-  integrity="sha512-bHeT+z+n8rh9CKrSrbyfbINxu7gsBmSHlDCb3gUF1BjmjDzKhoKspyB71k0CIRBSjE5IVQiMMVBgCWjF60qsvA=="
-  crossorigin="anonymous" referrerpolicy="no-referrer">
-</script>
-
-<script>
-axios.defaults.header = {
-  "Content-type": "application/json",
-  HTTP_HTTP_X_REQUESTED_WITH: "XMLHttpRequest",
-}
-async function loadUsers() {
-  try {
-    const data = await axios.get('/users');
-    console.log(data.data);
-  } catch (error) {
-    console.log(error);
-  }
-}
-loadUsers();
-</script>
-<?php $this->stop() ?>
