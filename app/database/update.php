@@ -4,7 +4,7 @@ function update($table, $fields, $where)
 {
     try {
         if (array_is_list($fields) || array_is_list($where)) {
-            throw new Exception("O array tem que ser associativo.");
+            throw new Exception('O array tem que ser associativo.');
         }
 
         $connect = connectDatabase();

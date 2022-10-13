@@ -1,24 +1,25 @@
 <?php
 
-function loadController($matchedUri, $params) {
-  [$controller, $method] = explode('@', array_values($matchedUri)[0]); // ! metodo list()
-  $controllerWithNamespace = CONTROLLER_PATH.$controller;
-  
-  if (!class_exists($controllerWithNamespace)) {
-    throw new Exception("Controller {$controller} não existe");
-  }
+function loadController($matchedUri, $params)
+{
+    [$controller, $method] = explode('@', array_values($matchedUri)[0]); // ! metodo list()
+    $controllerWithNamespace = CONTROLLER_PATH . $controller;
 
-  $controllerInstance = new $controllerWithNamespace();
+    if (!class_exists($controllerWithNamespace)) {
+        throw new Exception("Controller {$controller} não existe");
+    }
 
-  if (!method_exists($controllerInstance, $method)) {
-    throw new Exception("Método {$method} nao existe no controller {$controller}");
-  }
+    $controllerInstance = new $controllerWithNamespace();
 
-  $controller = $controllerInstance->$method($params);
+    if (!method_exists($controllerInstance, $method)) {
+        throw new Exception("Método {$method} nao existe no controller {$controller}");
+    }
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    die();
-  }
+    $controller = $controllerInstance->$method($params);
 
-  return $controller;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        die();
+    }
+
+    return $controller;
 }
