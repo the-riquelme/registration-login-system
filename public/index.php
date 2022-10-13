@@ -5,6 +5,10 @@ require 'bootstrap.php';
 try {
     $router = router();
 
+    if (isAjax()) {
+        die();
+    }
+
     if (!isset($router['data'])) {
         throw new Exception('O índice data está faltando');
     }
