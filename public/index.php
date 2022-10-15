@@ -37,5 +37,5 @@ try {
 
     // require VIEWS.'master.php';
 } catch(Exception $e) {
-    var_dump($e->getMessage());
+    dieDump($e->getMessage());
 }

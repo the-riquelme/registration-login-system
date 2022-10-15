@@ -19,6 +19,6 @@ function delete($table, $where)
 
         return $prepare->rowCount();
     } catch (PDOException $e) {
-        var_dump($e->getMessage());
+        dieDump($e->getMessage());
     }
 }

@@ -16,6 +16,6 @@ function create($table, $data)
         $prepare = $connect->prepare($sql);
         return $prepare->execute($data);
     } catch (PDOException $e) {
-        var_dump($e->getMessage());
+        dieDump($e->getMessage());
     }
 }

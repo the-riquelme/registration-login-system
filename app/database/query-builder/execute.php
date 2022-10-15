@@ -35,7 +35,6 @@ function execute(bool $isFetchAll = true, bool $rowCount = false)
             'sql' => $query['sql'],
         ];
 
-        var_dump($error);
-        die();
+        dieDump($error);
     }
 }

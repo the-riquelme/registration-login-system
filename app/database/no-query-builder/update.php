@@ -25,6 +25,6 @@ function update($table, $fields, $where)
 
         return $prepare->rowCount();
     } catch (PDOException $e) {
-        var_dump($e->getMessage());
+        dieDump($e->getMessage());
     }
 }

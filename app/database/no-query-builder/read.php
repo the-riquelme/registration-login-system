@@ -9,7 +9,7 @@ function fetchAll($table, $fields = '*')
 
         return $query->fetchAll();
     } catch (PDOException $e) {
-        var_dump($e->getMessage());
+        dieDump($e->getMessage());
     }
 }
 
@@ -23,6 +23,6 @@ function findBy($table, $field, $value, $fields = '*')
 
         return $prepare->fetch();
     } catch (PDOException $e) {
-        var_dump($e->getMessage());
+        dieDump($e->getMessage());
     }
 }

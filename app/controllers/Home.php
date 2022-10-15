@@ -9,7 +9,10 @@ class Home
         read('users', 'id, name, surname');
         order('id', 'DESC');
         limit(2);
-        $users = execute();
+        $users = execute(isFetchAll:false);
+
+        var_dump(json_encode($users));
+        die();
         // $users = fetchAll('users');
 
         // return [
