@@ -76,7 +76,7 @@ function multipleValidations($validate, $field, $param)
     return $result[$field] ;
 }
 
-function validate(array $validations)
+function validate(array $validations, bool $persistInput = false)
 {
     $result = [];
     $param = '';
@@ -85,6 +85,10 @@ function validate(array $validations)
         $result[$field] = (!str_contains($validate, '|')) ?
           singleValidation($validate, $field, $param) :
           multipleValidations($validate, $field, $param);
+    }
+
+    if ($persistInput) {
+        setOld();
     }
 
     if (in_array(false, $result)) {
