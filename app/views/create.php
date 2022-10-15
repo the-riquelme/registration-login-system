@@ -5,6 +5,9 @@
 <?= getFlash('message'); ?>
 
 <form action="/user/store" method="POST" class="create-form">
+
+  <?= getCsrf(); ?>
+
   <input type="text" name="name" placeholder="Seu nome" value="<?= getOld('name') ?>">
   <?= getFlash('name'); ?>
   <br>
@@ -17,5 +20,7 @@
   <input type="password" name="password" placeholder="Sua senha" value="<?= getOld('password') ?>">
   <?= getFlash('password'); ?>
   <br>
+
   <button type="submit">Create</button>
+
 </form>

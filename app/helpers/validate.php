@@ -76,8 +76,12 @@ function multipleValidations($validate, $field, $param)
     return $result[$field] ;
 }
 
-function validate(array $validations, bool $persistInput = false)
+function validate(array $validations, bool $persistInput = false, bool $checkCsrf = false)
 {
+    if ($checkCsrf) {
+        checkCsrf();
+    }
+
     $result = [];
     $param = '';
 

@@ -12,6 +12,7 @@
       "app/helpers/validate.php",
       "app/helpers/helpers.php",
       "app/helpers/old.php",
+      "app/helpers/csrf.php",
       "app/router/router.php",
       "app/core/controller.php",
       "app/database/connect.php",
