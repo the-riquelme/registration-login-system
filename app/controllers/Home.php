@@ -6,21 +6,22 @@ class Home
 {
     public function index($params)
     {
+        $search = ($_GET['search']);
+
         read('users', 'id, name, surname');
-        order('id', 'DESC');
-        limit(2);
-        $users = execute(isFetchAll:false);
 
-        var_dump(json_encode($users));
-        die();
-        // $users = fetchAll('users');
+        if ($search) {
+            search(['name' => $search]);
+        }
 
-        // return [
-        //     'view' => 'home',
-        //     'data' => [
-        //         'title' => 'Home',
-        //         'users' => $users,
-        //     ]
-        // ];
+        $users = execute();
+
+        return [
+            'view' => 'home',
+            'data' => [
+                'title' => 'Home',
+                'users' => $users,
+            ]
+        ];
     }
 }
