@@ -8,7 +8,7 @@ require 'query-builder/limit.php';
 require 'query-builder/order.php';
 require 'query-builder/paginate.php';
 require 'query-builder/where.php';
-// require 'query-builder/join.php';
+require 'query-builder/join.php';
 require 'query-builder/search.php';
 require 'query-builder/execute.php';
 

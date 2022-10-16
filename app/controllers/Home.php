@@ -6,9 +6,10 @@ class Home
 {
     public function index($params)
     {
-        $search = ($_GET['search']);
+        $search = htmlspecialchars($_GET['search']);
 
-        read('users', 'id, name, surname');
+        read('users');
+        tableJoin('posts', 'id');
 
         if ($search) {
             search(['name' => $search]);
