@@ -6,14 +6,15 @@ class Home
 {
     public function index($params)
     {
-        $search = htmlspecialchars($_GET['search']);
+        $search = htmlspecialchars($_GET['search'] ?? '');
 
         read('users');
-        paginate(2);
 
-        // if ($search) {
-        //     search(['name' => $search]);
-        // }
+        if ($search) {
+            search(['name' => $search]);
+        }
+
+        paginate(5);
 
         $users = execute();
 
@@ -22,6 +23,7 @@ class Home
             'data' => [
                 'title' => 'Home',
                 'users' => $users,
+                'links' => render()
             ]
         ];
     }

@@ -15,3 +15,5 @@
   </li>
   <?php endforeach; ?>
 </ul>
+
+<?= $links ?>
