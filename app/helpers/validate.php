@@ -47,6 +47,17 @@ function maxlen($field, $param)
     return $data;
 }
 
+function optional($field)
+{
+    $data = strip_tags($_POST[$field]);
+
+    if ($data === '') {
+        return null;
+    }
+
+    return $data;
+}
+
 function singleValidation($validate, $field, $param)
 {
     if (str_contains($validate, ':')) {
@@ -68,7 +79,7 @@ function multipleValidations($validate, $field, $param)
 
         $result[$field] = $validate($field, $param);
 
-        if (isset($result[$field]) && $result[$field] === false) {
+        if ($result[$field] === false || $result[$field] === null) {
             break;
         }
     }
@@ -95,7 +106,7 @@ function validate(array $validations, bool $persistInput = false, bool $checkCsr
         setOld();
     }
 
-    if (in_array(false, $result)) {
+    if (in_array(false, $result, true)) {
         return false;
     }
 
