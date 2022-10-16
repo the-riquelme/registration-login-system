@@ -8,7 +8,7 @@
 
 <form action="/login" method="POST" id="box-login">
   <input type="email" name="email" placeholder="Seu email" value="rd15075@gmail.com">
-  <input type="password" name="password" placeholder="Sua senha" value="Chaves122@">
+  <input type="password" name="password" placeholder="Sua senha" value="batata@">
   <button type="message">Login</button>
 </form>
 
