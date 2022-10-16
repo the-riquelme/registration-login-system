@@ -9,11 +9,11 @@ class Home
         $search = htmlspecialchars($_GET['search']);
 
         read('users');
-        tableJoin('posts', 'id');
+        paginate(2);
 
-        if ($search) {
-            search(['name' => $search]);
-        }
+        // if ($search) {
+        //     search(['name' => $search]);
+        // }
 
         $users = execute();
 
