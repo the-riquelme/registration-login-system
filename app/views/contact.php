@@ -11,8 +11,10 @@
 
   <input type="text" name="name" placeholder="Seu nome" value="<?= getOld('name'); ?>">
   <?= getFlash('name'); ?><br>
+
   <input type="text" name="email" placeholder="Seu email" value="<?= getOld('email'); ?>">
   <?= getFlash('email'); ?><br>
+
   <input type="text" name="subject" placeholder="Assunto" value="<?= getOld('subject'); ?>">
   <?= getFlash('subject'); ?><br>
 

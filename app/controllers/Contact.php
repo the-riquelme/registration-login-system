@@ -21,7 +21,7 @@ class Contact
             'email' => 'required|email',
             'subject' => 'required',
             'message' => 'required'
-        ], checkCsrf:true);
+        ], persistInput:true, checkCsrf:true);
 
         if (!$validated) {
             return redirect('/contact');
@@ -37,6 +37,13 @@ class Contact
             'template' => 'contact'
         ]);
 
-        var_dump($sent);
+        if ($sent) {
+            return setMessageAndRedirect('contact_success', 'Enviado com sucesso', '/contact');
+        }
+        return setMessageAndRedirect(
+            'contact_error',
+            'Ocorreu um erro ao enviar o email, tente novamente em alguns segundos',
+            '/contact'
+        );
     }
 }
