@@ -22,6 +22,8 @@ function sendEmail(stdClass|array $emailData)
             $emailData = (object) $emailData;
         }
 
+        $body = (isset($emailData->template)) ? template($emailData) : $emailData->message;
+
         checkPropertiesEmail($emailData);
 
         $mail = configEmail();
@@ -31,7 +33,7 @@ function sendEmail(stdClass|array $emailData)
         $mail->isHTML(true);
         $mail->CharSet = 'UTF-8';
         $mail->Subject = $emailData->subject;
-        $mail->Body = $emailData->message;
+        $mail->Body = $body;
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         return $mail->send();
@@ -52,4 +54,23 @@ function checkPropertiesEmail($emailData)
             throw new Exception("{$prop} é obrigatório para enviar o email");
         }
     }
+}
+
+function template($emailData)
+{
+    $templateFile = ROOT . "/app/views/emails/{$emailData->template}.html";
+
+    if (!file_exists($templateFile)) {
+        throw new Exception("O template {$emailData->template}.html não existe");
+    }
+
+    $template = file_get_contents($templateFile); //content html as string
+
+    $emailVars = get_object_vars($emailData);
+
+    $arr = array_map(function ($key) {
+        return "@{$key}";
+    }, array_keys($emailVars));
+
+    return str_replace($arr, array_values($emailVars), $template);
 }

@@ -36,5 +36,7 @@ class Contact
             'message' => $validated['message'],
             'template' => 'contact'
         ]);
+
+        var_dump($sent);
     }
 }
