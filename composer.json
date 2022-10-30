@@ -14,6 +14,7 @@
       "app/helpers/old.php",
       "app/helpers/csrf.php",
       "app/helpers/email.php",
+      "app/helpers/image.php",
       "app/router/router.php",
       "app/core/controller.php",
       "app/database/connect.php",

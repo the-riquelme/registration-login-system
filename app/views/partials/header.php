@@ -10,7 +10,8 @@
 <div id="status_login">
   Bem vindo,
   <?php if (logged()): ?>
-  <?= getSessionUser()->name ?>| <a href="/logout">Logout</a>
+  <?= getSessionUser()->name ?> | <a href="/logout">Logout</a>
+  <a href="/user/edit/profile">Edit Profile</a>
   <?php else: ?>
   visitante
   <?php endif; ?>
