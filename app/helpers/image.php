@@ -20,3 +20,27 @@ function isImage($extension)
         throw new Exception("O arquivo não é aceito, aceitamos somente {$extensions}");
     }
 }
+
+function getFunctionCreateFrom(string $extension)
+{
+    return match ($extension) {
+        'png' => ['imagecreatefrompng', 'imagepng'],
+        'jpg', 'jpeg' => ['imagecreatefromjpeg', 'imagejpeg'],
+        'gif' => ['imagecreatefromgif', 'imagegif'],
+    };
+}
+
+function upload(int $newWidth, int $newHeight, string $folder, string $type = 'resize')
+{
+    isFileToUpload('file');
+
+    $extension = getExtension($_FILES['file']['name']);
+
+    isImage($extension);
+
+    [$width, $height] = getimagesize($_FILES['file']['tmp_name']);
+
+    [$functionCrateFrom, $saveImage] = getFunctionCreateFrom($extension);
+
+    $src = $functionCrateFrom($_FILES['file']['tmp_name']);
+}
