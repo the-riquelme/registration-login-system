@@ -90,6 +90,27 @@ function optional($field)
     return $data;
 }
 
+function confirmed($field)
+{
+    if (!isset($_POST[$field], $_POST[$field . '_confirmation'])) {
+        setFlash($field, "Os campos para atualizar a senha são obrigatórios");
+        return false;
+    }
+
+    $value = strip_tags($_POST[$field]);
+    $value_confirmation = strip_tags($_POST[$field.'_confirmation']);
+
+    if ($value !== $value_confirmation) {
+        setFlash($field, "Os dois campos tem que ser iguais");
+        return false;
+    }
+
+    if ($field === 'password') {
+        return password_hash($value, PASSWORD_DEFAULT);
+    }
+    return $value;
+}
+
 function singleValidation($validate, $field, $param)
 {
     if (str_contains($validate, ':')) {

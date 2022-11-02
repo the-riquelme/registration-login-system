@@ -24,6 +24,24 @@
 
 <hr>
 
+<?= getFlash('password_success', 'color:green'); ?>
+<?= getFlash('password_error'); ?>
+
+<form action="/password/user/<?= $user->id ?>" method="post">
+
+  <?= getCsrf(); ?>
+
+  <input type="text" name="password">
+  <?= getFlash('password'); ?>
+
+  <input type="text" name="password_confirmation">
+  <?= getFlash('password_confirmation'); ?>
+
+  <button type="submit">Atualizar</button>
+</form>
+
+<hr>
+
 <form action="/user/profile/update" method="POST"></form>
 
 <hr>
