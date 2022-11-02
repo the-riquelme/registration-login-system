@@ -10,8 +10,15 @@
 <div id="status_login">
   Bem vindo,
   <?php if (logged()): ?>
+
+  <?php if (getSessionUser()->path) : ?>
+  <img src="/<?= getSessionUser()->path ?>" class="rounded-circle" width="30" height="30">
+  <?php endif; ?>
+
   <?= getSessionUser()->name ?> | <a href="/logout">Logout</a>
+
   <a href="/user/edit/profile">Edit Profile</a>
+
   <?php else: ?>
   visitante
   <?php endif; ?>

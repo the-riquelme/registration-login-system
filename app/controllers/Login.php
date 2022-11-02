@@ -21,7 +21,11 @@ class Login
             return setMessageAndRedirect('message', 'Usuário ou senha inválidos', '/login');
         }
 
-        $user = findBy('users', 'email', $email);
+        read('users', 'users.id, name, surname, email, password, path');
+        tableJoin('photos', 'id', 'left');
+        where('email', $email);
+
+        $user = execute(isFetchAll:false);
 
         if (!$user) {
             return setMessageAndRedirect('message', 'Usuário ou senha inválidos', '/login');
@@ -30,6 +34,8 @@ class Login
         if (!password_verify($password, $user->password)) {
             return setMessageAndRedirect('message', 'Usuário ou senha inválidos', '/login');
         }
+
+        unset($user->password);
 
         $_SESSION[LOGGED] = $user;
         return redirect();

@@ -17,6 +17,16 @@ class User
 
     public function edit()
     {
+        if (!logged()) {
+            redirect();
+        }
+
+        read('users', 'users.id, name, surname, email, password, path');
+        tableJoin('photos', 'id', 'left');
+        where('users.id', getSessionUser()->id);
+
+        $user = execute(isFetchAll:false);
+
         return [
             'view' => 'edit',
             'data' => ['title' => 'Edit']
