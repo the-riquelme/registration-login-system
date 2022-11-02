@@ -6,8 +6,7 @@ class UserImage
 {
     public function store()
     {
-        $extension = getExtension($_FILES['file']['name']);
-        isImage('file');
+        upload(640, 480, 'assets/img');
         // try {
         // } catch (\Exception $e) {
         //     setMessageAndRedirect('upload_error', $e->getMessage(), '/user/edit/profile');

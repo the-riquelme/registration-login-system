@@ -30,6 +30,17 @@ function getFunctionCreateFrom(string $extension)
     };
 }
 
+function resize(int $width, int $height, int $newWidth, int $newHeight)
+{
+    $ratio = $width / $height;
+
+    ($newWidth / $newHeight > $ratio) ?
+        $newWidth = $newHeight * $ratio :
+        $newHeight = $newWidth / $ratio;
+
+    return [$newWidth, $newHeight];
+}
+
 function upload(int $newWidth, int $newHeight, string $folder, string $type = 'resize')
 {
     isFileToUpload('file');
@@ -43,4 +54,16 @@ function upload(int $newWidth, int $newHeight, string $folder, string $type = 'r
     [$functionCrateFrom, $saveImage] = getFunctionCreateFrom($extension);
 
     $src = $functionCrateFrom($_FILES['file']['tmp_name']);
+
+    if ($type === 'resize') {
+        [$newWidth, $newHeight] = resize($width, $height, $newWidth, $newHeight);
+        $dst = imagecreatetruecolor($newWidth, $newHeight);
+        imagecopyresampled($dst, $src, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+    }
+
+    $path = $folder . DIRECTORY_SEPARATOR . rand() . '.' . $extension;
+
+    $saveImage($dst, $path);
+
+    return $path;
 }
