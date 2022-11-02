@@ -29,7 +29,7 @@ class User
 
         return [
             'view' => 'edit',
-            'data' => ['title' => 'Edit']
+            'data' => ['title' => 'Edit', 'user' => $user]
         ];
     }
 
@@ -62,5 +62,30 @@ class User
         }
 
         return redirect('/');
+    }
+
+    public function update($args)
+    {
+        if (!isset($args['user']) || $args['user'] != getSessionUser()->id) {
+            return redirect('/');
+        }
+
+        $validated = validate([
+            'name' => 'required',
+            'surname' => 'required',
+            'email' => 'optional|email',
+        ]);
+
+        if (!$validated) {
+            return redirect('/user/edit/profile');
+        }
+
+        $updated = update('users', $validated, ['id' => getSessionUser()->id]);
+
+        if ($updated) {
+            return setMessageAndRedirect('updated_success', 'Atualizado com sucesso', '/user/edit/profile');
+        }
+
+        setMessageAndRedirect('updated_error', 'Ocorreu um erro ao atualizar', '/user/edit/profile');
     }
 }
