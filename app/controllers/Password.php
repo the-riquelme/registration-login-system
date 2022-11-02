@@ -11,8 +11,8 @@ class Password
         }
 
         $validated = validate([
-            'email' => 'required|confirmed',
-            'email_confirmation' => 'required'
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required'
         ], checkCsrf: true);
 
         if (!$validated) {
@@ -24,6 +24,16 @@ class Password
         ], ['id' => getSessionUser()->id]);
 
         if ($updated) {
+            $user = getSessionUser();
+            sendEmail([
+                'fromName' => $_ENV['TONAME'],
+                'fromEmail' => $_ENV['TOEMAIL'],
+                'toName' => $user->name,
+                'toEmail' => $user->email,
+                'subject' => 'Senha alterada',
+                'message' => 'Senha alterada com sucesso',
+                'template' => 'password'
+            ]);
             return setMessageAndRedirect('password_success', 'Senha alterada com sucesso', "/user/edit/profile");
         } else {
             return setMessageAndRedirect('password_error', 'Ocorreu um erro ao atualizar a senha ', "/user/edit/profile");

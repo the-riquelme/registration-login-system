@@ -98,7 +98,7 @@ function confirmed($field)
     }
 
     $value = strip_tags($_POST[$field]);
-    $value_confirmation = strip_tags($_POST[$field.'_confirmation']);
+    $value_confirmation = strip_tags($_POST[$field . '_confirmation']);
 
     if ($value !== $value_confirmation) {
         setFlash($field, "Os dois campos tem que ser iguais");

@@ -31,10 +31,10 @@
 
   <?= getCsrf(); ?>
 
-  <input type="text" name="password">
+  <input type="password" name="password">
   <?= getFlash('password'); ?>
 
-  <input type="text" name="password_confirmation">
+  <input type="password" name="password_confirmation">
   <?= getFlash('password_confirmation'); ?>
 
   <button type="submit">Atualizar</button>
