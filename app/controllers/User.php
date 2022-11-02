@@ -73,7 +73,7 @@ class User
         $validated = validate([
             'name' => 'required',
             'surname' => 'required',
-            'email' => 'optional|email',
+            'email' => 'optional|email|uniqueUpdate:users,id=' . $args['user'],
         ]);
 
         if (!$validated) {

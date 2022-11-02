@@ -35,6 +35,38 @@ function unique($field, $param)
     return $data;
 }
 
+function uniqueUpdate($field, $param)
+{
+    $email = strip_tags($_POST[$field]);
+
+    if (!str_contains($param, '=')) {
+        setFlash($field, "Esse valor já está cadastrado");
+        return false;
+    }
+
+    [$fieldToCompare, $value] = explode('=', $param);
+
+    if (!str_contains($fieldToCompare, ',')) {
+        setFlash($field, "Esse valor já está cadastrado");
+        return false;
+    }
+
+    $table = substr($fieldToCompare, 0, strpos($fieldToCompare, ','));
+    $fieldToCompare = substr($fieldToCompare, strpos($fieldToCompare, ',') + 1);
+
+    read($table);
+    where($field, $email);
+    orWhere($fieldToCompare, '!=', $value, 'and');
+    $userFound = execute(isFetchAll:false);
+
+    if ($userFound) {
+        setFlash($field, "Esse valor já está cadastrado");
+        return false;
+    }
+
+    return $email;
+}
+
 function maxlen($field, $param)
 {
     $data = strip_tags($_POST[$field]);
