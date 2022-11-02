@@ -41,6 +41,21 @@ function resize(int $width, int $height, int $newWidth, int $newHeight)
     return [$newWidth, $newHeight];
 }
 
+function crop(int $width, int $height, int $newWidth, int $newHeight)
+{
+    $thumbWidth = $newWidth;
+    $thumbHeight = $newHeight;
+
+    $srcAspect = $width / $height;
+    $dstAspect = $thumbWidth / $thumbHeight;
+
+    ($srcAspect >= $dstAspect) ?
+        $newWidth = $width / ($height / $thumbHeight) :
+        $newHeight = $height / ($width / $thumbWidth);
+
+    return [$newWidth, $newHeight, $thumbWidth, $thumbHeight];
+}
+
 function upload(int $newWidth, int $newHeight, string $folder, string $type = 'resize')
 {
     isFileToUpload('file');
@@ -59,6 +74,21 @@ function upload(int $newWidth, int $newHeight, string $folder, string $type = 'r
         [$newWidth, $newHeight] = resize($width, $height, $newWidth, $newHeight);
         $dst = imagecreatetruecolor($newWidth, $newHeight);
         imagecopyresampled($dst, $src, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+    } else {
+        [$newWidth, $newHeight, $thumbWidth, $thumbHeight] = crop($width, $height, $newWidth, $newHeight);
+        $dst = imagecreatetruecolor($thumbWidth, $thumbHeight);
+        imagecopyresampled(
+            $dst,
+            $src,
+            0 - ($newWidth - $thumbWidth) / 2,
+            0 - ($newHeight - $thumbHeight) / 2,
+            0,
+            0,
+            $newWidth,
+            $newHeight,
+            $width,
+            $height
+        );
     }
 
     $path = $folder . DIRECTORY_SEPARATOR . rand() . '.' . $extension;
